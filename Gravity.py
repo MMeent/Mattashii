@@ -7,7 +7,7 @@ from collections import defaultdict
 
 WIDTH, HEIGHT = 900, 600
 
-PLANETS = 3
+PLANETS = 2 
 
 # The density of the planets - used to calculate their mass
 # from 
@@ -118,15 +118,15 @@ def main():
   g_listOfPlanets=[]
   for i in xrange(0, PLANETS):
     g_listOfPlanets.append(Planet())
-
+  
   def planetsTouch(p1, p2):
     dx = p1._st._x - p2._st._x
     dy = p1._st._y - p2._st._y
     dsq = dx*dx + dy*dy
     dr = math.sqrt(dsq)
-    return dr<=(p1._r + p2._r)
+    return (dr <= (p1._r + p2._r))
 
-  t, dt = 0., 1.
+  t, dt = 0., 0.1
 
   while True:
     t += dt
@@ -134,24 +134,26 @@ def main():
     for p in g_listOfPlanets:
       planet += 1.
       print "PLANET!!!"
-    if not p._merged:
+      if not p._merged:
         p.updatePlanet(t,dt)
-        print "p:{nr} t:{time} x:{X} y:{Y} vx:{vX} vy:{vY}".format(
+        print "p:{nr} t:{time} {data}".format(
           nr = planet, 
           time = t,
-          X = p._st._x, 
-          Y = p._st._y, 
-          vX = p._st._vx, 
-          vY = p._st._vy)
+          data = p._st)
+      else:
+        print "planet {nr} is merged".format(nr = planet)
 
     for p1 in g_listOfPlanets:
       print "hi"
       if p1._merged:
+        print "is merged"
         continue
       for p2 in g_listOfPlanets:
         if p1 is p2 or p2._merged:
+          print p2._merged
           continue
         if planetsTouch(p1, p2):
+          print "touch"
           if p1._m < p2._m:
             p1, p2 = p2, p1
           p2._merged = True
