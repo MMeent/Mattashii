@@ -2,10 +2,10 @@
 
 import math
 
-class SpacialData():
+class SpatialData():
     def __init__(self, x, y, z, vx, vy, vz):
-        self._x, self._y, self._z = x, y, z
-        self._vx, self._vy, self._vz = vx, vy, vz
+        self.body.sd._x, self.body.sd._y, self.body.sd._z = x, y, z
+        self.body.sd._vx, self.body.sd._vy, self.body.sd._vz = vx, vy, vz
 
     def __repr__(self):
         return "x:{x} y:{y} z:{z} vx:{vx} vy:{vy} vz:{vz}".format(
@@ -43,22 +43,22 @@ class Derivative(object):
             dvy = self._dvy,
             dvz = self._dvz)
 
-class Body(object):
+class Body(SpatialData):
     def __init__(self, x, y, z, vx, vy, vz, mass):
-        self._sd = SpacialData(x, y, z, vx, vy, vz)
-        self._mass = mass
-        self._ax, self._ay, self._az = 0., 0., 0.
+        super(SpatialData, self).__init__(x, y, z, vx, vy, vz)
+        self.body.mass = mass
+        self.body.ax, self.body.ay, self.body.az = 0., 0., 0.
 
     def __repr__(self):
         return " mass: {mass} \n {data}".format(
-            mass = self._mass,
-            data = repr(self._sd))
+            mass = self.body.mass,
+            data = repr(self.body.sd))
 #todo: implement Time Control
     
     def distance(self, body):
-        dx = self._st._x - body._st._x
-        dy = self._st._y - body._st._y
-        dz = self._st._z - body._st._z
+        dx = self.body.st._x - body.body.st._x
+        dy = self.body.st._y - body.body.st._y
+        dz = self.body.st._z - body.body.st._z
         delta = math.sqrt(dx*dx + dy*dy + dz*dz)
         return delta
     
@@ -68,83 +68,83 @@ class Body(object):
     
     def CalcForce(self, body, Gc):
         delta = distance(body)
-        force = Gc * body._mass * self._mass / (delta*delta)
+        force = Gc * body.mass * self.body.mass / (delta*delta)
         return force
 
     def accelerate(self, body, Gc):
         Acc = CalcForce(body, Gc)
-        self._ax += force*delta(self._st._x, body._st._x)/distance(body)
-        self._ay += force*delta(self._st._y, body._st._y)/distance(body)
-        self._az += force*delta(self._st._z, body._st._z)/distance(body)
+        self.body._ax += force*delta(self.body.st._x, body.body.st._x)/distance(body)
+        self.body._ay += force*delta(self.body.st._y, body.body.st._y)/distance(body)
+        self.body._az += force*delta(self.body.st._z, body.body.st._z)/distance(body)
 
     def update(self, dt):
-        self._x += self._vx*dt
-        self._y += self._vy*dt
-        self._z += self._vz*dt
-        self._vx += self._ax*dt
-        self._vy += self._ay*dt
-        self._vz += self._az*dt
-        self._ax, self._ay, self._az = 0., 0., 0.
+        self.body.sd._x += self.body.sd._vx*dt
+        self.body.sd._y += self.body.sd._vy*dt
+        self.body.sd._z += self.body.sd._vz*dt
+        self.body.sd._vx += self.body._ax*dt
+        self.body.sd._vy += self.body._ay*dt
+        self.body.sd._vz += self.body._az*dt
+        self.body._ax, self.body._ay, self.body._az = 0., 0., 0.
 
-class Sattelite(object):
+class Sattelite(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, name):
-        self.body = Body(x, y, z, vx, vy, vz, mass)
+        super(Body, self).__init__(x, y, z, vx, vy, vz, mass)
         self._name = name
 
     def __repr__(self):
         return " Sattelite: {name} \n{data}".format(
             name = self._name,
-            data = repr(self.body))
+            data = super(Body, self).__repr__())
 
-class Moon(object):
+class Moon(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, aPressure, name):
-        self.body = Body(x, y, z, vx, vy, vz, mass)
-        self._rad = radius
+        super(Body, self).__init__(x, y, z, vx, vy, vz, mass)
+        self.body._rad = radius
         self._pre = aPressure
         self._name = name
 
     def __repr__(self):
         return " Moon: {name} \n radius: {rad} \n pressure: {pre} \n{data}".format(
             name = self._name,
-            rad = self._rad,
+            rad = self.body._rad,
             pre = self._pre,
-            data = repr(self.body))
+            data = super(Body, self).__repr__())
 
-class Planet(object):
+class Planet(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, aPressure, name):
-        self.body = Body(x, y, z, vx, vy, vz, mass)
-        self._rad = radius
+        super(Body, self).__init__(x, y, z, vx, vy, vz, mass)
+        self.body._rad = radius
         self._pre = aPressure
         self._name = name
 
     def __repr__(self):
         return " Planet: {name} \n radius: {rad} \n pressure: {pre} \n{data}".format(
             name = self._name,
-            rad = self._rad,
+            rad = self.body._rad,
             pre = self._pre,
-            data = repr(self.body))
+            data = super(Body, self).__repr__())
 
 
-class Star(object):
+class Star(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, name):
-        self.body = Body(x, y, z, vx, vy, vz, mass)
-        self._rad = radius
+        super(Body, self).__init__(x, y, z, vx, vy, vz, mass)
+        self.body._rad = radius
         self._name = name
 
     def __repr__(self):
         return " Star: {name} \n radius: {rad} \n{data}".format(
             name = self._name,
-            rad = self._rad,
-            data = repr(self.body))
+            rad = self.body._rad,
+            data = super(Body, self).__repr__())
 
-class Astroid(object):
+class Astroid(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, name):
-        self.body = Body(x, y, z, vx, vy, vz, mass)
-        self._rad = radius
+        super(Body, self).__init__(x, y, z, vx, vy, vz, mass)
+        self.body._rad = radius
         self._name = name
 
     def __repr__(self):
         return " Astroid: {name} \n radius: {rad} \n{data}".format(
             name = self._name,
-            rad = self._rad,
-            data = repr(self.body))
+            rad = self.body._rad,
+            data = super(Body, self).__repr__())
