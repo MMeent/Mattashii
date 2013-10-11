@@ -1,20 +1,6 @@
 {
     "Stars": [
         {
-<<<<<<< HEAD
-        "name":"Sun",
-        "SurfaceTemperature":5778,
-        "body":{
-            "radius":6.96342e8,
-            "mass":1.9891e30,
-            "SpatialData":{
-                "x":0,
-                "y":0,
-                "z":0,
-                "vx":0,
-                "vy":0,
-                "vz":0
-=======
             "name": "Sun",
             "SurfaceTemperature": 5.778,
             "body": {
@@ -27,28 +13,10 @@
                     "vx": 0,
                     "vy": 0,
                     "vz": 0
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         }
     ],
-<<<<<<< HEAD
-    "Planets":[
-        {
-        "name":"Mercury",
-        "SurfaceTemperature":340,
-        "SurfacePressure":0,
-        "body":{
-            "radius":2439.7,
-            "mass":3.3022e23,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
     "Planets": [
         {
             "name": "Mercury",
@@ -64,26 +32,10 @@
                     "vx": 1,
                     "vy": 2,
                     "vz": 3
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         },
         {
-<<<<<<< HEAD
-        "name":"Venus",
-        "SurfaceTemperature":737,
-        "SurfacePressure":9200000,
-        "body":{
-            "radius":6051.8,
-            "mass":4.8676e24,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
             "name": "Venus",
             "SurfaceTemperature": 737,
             "SurfacePressure": 9200000,
@@ -97,26 +49,10 @@
                     "vx": 1,
                     "vy": 2,
                     "vz": 3
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         },
         {
-<<<<<<< HEAD
-        "name":"Earth",
-        "SurfaceTemperature":288,
-        "SurfacePressure":101325,
-        "body":{
-            "radius":6371.0,
-            "mass":5.97219e24,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
             "name": "Earth",
             "SurfaceTemperature": 288,
             "SurfacePressure": 101325,
@@ -130,26 +66,10 @@
                     "vx": 3,
                     "vy": 2,
                     "vz": 1
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         },
         {
-<<<<<<< HEAD
-        "name":"Mars",
-        "SurfaceTemperature":210,
-        "SurfacePressure":636,
-        "body":{
-            "radius":3396.2,
-            "mass":6.4185e23,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
             "name": "Mars",
             "SurfaceTemperature": 210,
             "SurfacePressure": 636,
@@ -163,27 +83,10 @@
                     "vx": 3,
                     "vy": 2,
                     "vz": 1
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         }
     ],
-<<<<<<< HEAD
-    "Moons":[
-        {
-        "name":"Moon",
-        "SurfacePressure":0,
-        "body":{
-            "radius":1737.10,
-            "mass":7.3477e22,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
     "Moons": [
         {
             "name": "Moon",
@@ -198,25 +101,10 @@
                     "vx": 1,
                     "vy": 2,
                     "vz": 3
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         },
         {
-<<<<<<< HEAD
-        "name":"Phobos",
-        "SurfacePressure":0,
-        "body":{
-            "radius":11.1,
-            "mass":1.072e16,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
             "name": "Phobos",
             "SurfacePressure": 0,
             "body": {
@@ -229,25 +117,10 @@
                     "vx": 3,
                     "vy": 2,
                     "vz": 1
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         },
         {
-<<<<<<< HEAD
-        "name":"Deimos",
-        "SurfacePressure":0,
-        "body":{
-            "radius":6.2,
-            "mass":1.48e15,
-            "SpatialData":{
-                "x":1,
-                "y":1,
-                "z":1,
-                "vx":1,
-                "vy":1,
-                "vz":1
-=======
             "name": "Deimos",
             "SurfacePressure": 0,
             "body": {
@@ -260,7 +133,6 @@
                     "vx": 1,
                     "vy": 2,
                     "vz": 3
->>>>>>> 17289c8fa9eaf046e18c645682c86d566d983169
                 }
             }
         }
