@@ -9,12 +9,12 @@ class SpatialData():
 
     def __repr__(self):
         return "x:{x} y:{y} z:{z} vx:{vx} vy:{vy} vz:{vz}".format(
-            x  = self._x, 
-            y  = self._y,
-            z  = self._z,
-            vx = self._vx,
-            vy = self._vy,
-            vz = self._vz)
+            x  = self.body.sd._x,
+            y  = self.body.sd._y,
+            z  = self.body.sd._z,
+            vx = self.body.sd._vx,
+            vy = self.body.sd._vy,
+            vz = self.body.sd._vz)
 
 
 #TODO: Time control
@@ -32,7 +32,7 @@ class Derivative(object):
     def __init__(self, dx, dy, dz, dvx, dvy, dvz):
         self._dx, self._dy, self._dz = dx, dy, dz
         self._dvx, self._dvy, self._dvz = dvx, dvy, dvz
-        self.ax, self.ay, self.az = 0., 0., 0.
+        self.body.ax, self.body.ay, self.body.az = 0., 0., 0.
 
     def __repr__(self):
         return "dx:{dx} dy:{dy} dz:{dz} dvx:{dvx} dvy:{dvy} dvz:{dvz}".format(

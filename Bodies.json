@@ -1,4 +1,5 @@
 {
+    "GravityConstant": 6.67384e-11,
     "Stars": [
         {
             "name": "Sun",
@@ -136,5 +137,9 @@
                 }
             }
         }
+    ],
+    "Astroids": [
+    ],
+    "Satellites": [
     ]
 }
