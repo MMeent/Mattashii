@@ -99,6 +99,31 @@ def main():
             bdata["mass"],
             satellite["name"]))
 
+    stardata = []
+    moondata = []
+    plandata = []
+    astrdata = []
+    satedata = []
+    for star in stars:
+        stardata.append(star.serialize())
+    for moon in moons:
+        moondata.append(moon.serialize())
+    for planet in planets:
+        plandata.append(planet.serialize())
+    for astroid in astroids:
+        astrdata.append(astroid.serialize())
+    for satellite in satellites:
+        satedata.append(satellite.serialize())
+    AllBodies = { "stars" : stardata,
+                  "moons" : moondata,
+                  "planets" : plandata,
+                  "astroids" : astrdata,
+                  "satellites" : satedata,
+                  }
+    print AllBodies
+
+    print "data: ", data
+
 
 if __name__ == '__main__':
     main()

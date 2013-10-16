@@ -131,7 +131,7 @@ class Moon(Body):
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
                       "pressure" : self._pre,
-                    }
+                    })
 
 class Planet(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, aPressure, name):
@@ -153,7 +153,7 @@ class Planet(Body):
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
                       "pressure" : self._pre,
-                    }
+                    })
 
 
 class Star(Body):
@@ -172,7 +172,7 @@ class Star(Body):
         data = super(Star, self).serialize()
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
-                    }
+                    })
 
 
 class Astroid(Body):
@@ -190,5 +190,5 @@ class Astroid(Body):
         data = super(Moon, self).serialize()
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
-                    }
+                    })
 
