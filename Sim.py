@@ -18,86 +18,33 @@ def main():
     jsonStars = data["Stars"]
     print "Stars: {data}".format(data = jsonStars)
     for star in jsonStars:
-        bdata = star["body"]
-        spdata = bdata["SpatialData"]
-        stars.append(GBodies.Star(
-            spdata["x"], 
-            spdata["y"], 
-            spdata["z"], 
-            spdata["vx"],
-            spdata["vy"],
-            spdata["vz"],
-            bdata["mass"],
-            bdata["radius"],
-            star["name"]))
+        stars.append(GBodies.Star.deserialize(star))
+
     planets = []
     jsonPlanets = data["Planets"]
     print "Planets: {data}".format(data = jsonPlanets)
     for planet in jsonPlanets:
-        bdata = planet["body"]
-        spdata = bdata["SpatialData"]
-        planets.append(GBodies.Planet(
-            spdata["x"],
-            spdata["y"],
-            spdata["z"],
-            spdata["vx"],
-            spdata["vy"],
-            spdata["vz"],
-            bdata["mass"],
-            bdata["radius"],
-            planet["SurfacePressure"],
-            planet["name"]))
+        planets.append(GBodies.Planet.deserialize(planet))
 
     moons = []
     jsonMoons = data["Moons"]
     print "Moons: {data}".format(data = jsonMoons)
     for moon in jsonMoons:
-        bdata = moon["body"]
-        spdata = bdata["SpatialData"]
-        moons.append(GBodies.Moon(
-            spdata["x"],
-            spdata["y"],
-            spdata["z"],
-            spdata["vx"],
-            spdata["vy"],
-            spdata["vz"],
-            bdata["mass"],
-            bdata["radius"],
-            moon["SurfacePressure"],
-            moon["name"]))
+        moons.append(GBodies.Moon.deserialize(moon))
 
     astroids = []
     jsonAstroids = data["Astroids"]
     print "Astroids: {data}".format(data = jsonAstroids)
     for astroid in jsonAstroids:
-        bdata = astroid["body"]
-        spdata = bdata["SpatialData"]
-        astroids.append(GBodies.Astroid(
-            spdata["x"],
-            spdata["y"],
-            spdata["z"],
-            spdata["vx"],
-            spdata["vy"],
-            spdata["vz"],
-            bdata["mass"],
-            bdata["radius"],
-            astroid["name"]))
+        astroids.append(GBodies.Astroid.deserialize(astroid))
 
     satellites = []
     jsonSatellites = data["Satellites"]
     print "Satellites: {data}".format(data = jsonSatellites)
     for satellite in jsonSatellites:
-        bdata = satellite["body"]
-        spdata = satellite["SpatialData"]
-        satellite.append(GBodies.Satellite(
-            spdata["x"],
-            spdata["y"],
-            spdata["z"],
-            spdata["vx"],
-            spdata["vy"],
-            spdata["vz"],
-            bdata["mass"],
-            satellite["name"]))
+        satellites.append(GBodies.Satellite.deserialize(satellite))
+
+
 
     stardata = []
     moondata = []
@@ -122,8 +69,7 @@ def main():
                   }
     print AllBodies
 
-    print "data: ", data
-
+    print "data: ", json.dumps(AllBodies)
 
 if __name__ == '__main__':
     main()

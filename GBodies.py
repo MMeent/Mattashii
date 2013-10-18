@@ -18,15 +18,6 @@ class SpatialData(object):
 
 
 #TODO: Time control
-#
-#class TimeData
-#  def __init__(self, SolarYear, SolarDay, Day, Hour)
-#    self._sy, self._sd = SolarYear, SolarDay
-#    self._d, self.h = Day, Hour
-#
-#  def __repr__(self):
-#    return "Date: {date} Time: {time}".format(
-#      date = self
 
 class Derivative(object):
     def __init__(self, dx, dy, dz, dvx, dvy, dvz):
@@ -64,6 +55,7 @@ class Body(SpatialData):
                      "vy" : self._vy,
                      "vz" : self._vz },
                  "mass" : self.mass } }
+
 #todo: implement Time Control
     
     def distance(self, body):
@@ -112,6 +104,19 @@ class Satellite(Body):
         data.update({ "name" : self._name })
         return data
 
+    @staticmethod
+    def deserialize(data):
+        bdata = data["body"]
+        spdata = bdata["SpatialData"]
+        return Satellite(spdata["x"],
+                         spdata["y"],
+                         spdata["z"],
+                         spdata["vx"],
+                         spdata["vy"],
+                         spdata["vz"],
+                         bdata["mass"],
+                         data["name"])
+
 class Moon(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, aPressure, name):
         super(Moon, self).__init__(x, y, z, vx, vy, vz, mass)
@@ -130,14 +135,32 @@ class Moon(Body):
         data = super(Moon, self).serialize()
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
-                      "pressure" : self._pre,
+                      "SurfacePressure" : self._pre,
                     })
+        return data
+
+    @staticmethod
+    def deserialize(data):
+        bdata = data["body"]
+        spdata = bdata["SpatialData"]
+        return Moon(spdata["x"],
+                    spdata["y"],
+                    spdata["z"],
+                    spdata["vx"],
+                    spdata["vy"],
+                    spdata["vz"],
+                    bdata["mass"],
+                    bdata["radius"],
+                    data["SurfacePressure"],
+                    data["name"])
+
 
 class Planet(Body):
-    def __init__(self, x, y, z, vx, vy, vz, mass, radius, aPressure, name):
+    def __init__(self, x, y, z, vx, vy, vz, mass, radius, aPressure, surTemp, name):
         super(Planet, self).__init__(x, y, z, vx, vy, vz, mass)
         self._rad = radius
         self._pre = aPressure
+        self._temp = surTemp
         self._name = name
 
     def __repr__(self):
@@ -152,14 +175,33 @@ class Planet(Body):
         data = super(Planet, self).serialize()
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
-                      "pressure" : self._pre,
+                      "SurfacePressure" : self._pre,
+                      "SurfaceTemperature" : self._temp
                     })
+        return data
+
+    @staticmethod
+    def deserialize(data):
+        bdata = data["body"]
+        spdata = bdata["SpatialData"]
+        return Planet(spdata["x"],
+                      spdata["y"],
+                      spdata["z"],
+                      spdata["vx"],
+                      spdata["vy"],
+                      spdata["vz"],
+                      bdata["mass"],
+                      bdata["radius"],
+                      data["SurfacePressure"],
+                      data["SurfaceTemperature"],
+                      data["name"])
 
 
 class Star(Body):
-    def __init__(self, x, y, z, vx, vy, vz, mass, radius, name):
+    def __init__(self, x, y, z, vx, vy, vz, mass, radius, surTemp, name):
         super(Star, self).__init__(x, y, z, vx, vy, vz, mass)
         self._rad = radius
+        self._temp = surTemp
         self._name = name
 
     def __repr__(self):
@@ -172,7 +214,24 @@ class Star(Body):
         data = super(Star, self).serialize()
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
+                      "SurfaceTemperature" : self._temp
                     })
+        return data
+
+    @staticmethod
+    def deserialize(data):
+        bdata = data["body"]
+        spdata = bdata["SpatialData"]
+        return Star(spdata["x"],
+                    spdata["y"],
+                    spdata["z"],
+                    spdata["vx"],
+                    spdata["vy"],
+                    spdata["vz"],
+                    bdata["mass"],
+                    bdata["radius"],
+                    data["SurfaceTemperature"],
+                    data["name"])
 
 
 class Astroid(Body):
@@ -191,4 +250,21 @@ class Astroid(Body):
         data.update({ "body" : { "radius" : self._rad },
                       "name" : self._name,
                     })
+        return data
 
+    @staticmethod
+    def deserialize(data):
+        bdata = data["body"]
+        spdata = bdata["SpatialData"]
+        return Astroid(spdata["x"],
+                       spdata["y"],
+                       spdata["z"],
+                       spdata["vx"],
+                       spdata["vy"],
+                       spdata["vz"],
+                       bdata["mass"],
+                       bdata["radius"],
+                       data["name"])
+
+if __name__ == "__main__":
+    print "help me"
