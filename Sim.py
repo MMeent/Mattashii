@@ -10,8 +10,14 @@ import GBodies
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r","--readfile", help="Set the input file")
-    parser.add_argument("-w","--writefile", help="Set the output file")
+    parser.add_argument("-r", "--readfile", help="Set the input file")
+    parser.add_argument("-w", "--writefile", help="Set the output file")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-ts", "--seconds", help="Set the simulation time in seconds")
+    group.add_argument("-tm", "--minutes", help="Set the simulation time in minutes")
+    group.add_argument("-th", "--hours", help="Set the simulation time in hours")
+    group.add_argument("-td", "--days", help="Set the simulation time in days")
+    group.add_argument("-ty", "--years", help="Set the simulation time in years")
     args = parser.parse_args()
     print args
 
