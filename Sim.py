@@ -2,11 +2,25 @@
 
 import sys
 import math
+import argparse
+import os.path
 import json
 import GBodies
 
 def main():
-    with open('Bodies.json', 'r') as f:
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-r","--readfile", help="Set the input file")
+    parser.add_argument("-w","--writefile", help="Set the output file")
+    args = parser.parse_args()
+    print args
+
+    if args.readfile == None:
+        readfile = "Bodies.json"
+    else:
+        readfile = args.readfile
+
+    with open(readfile, 'r') as f:
         data = json.load(f)
 
     print json.dumps(data, sort_keys=True, indent=4, separators=(',', ':'))
@@ -70,6 +84,23 @@ def main():
     print AllBodies
 
     print "data: ", json.dumps(AllBodies)
+
+    if args.writefile == None:
+        found = False
+    else:
+        found = True
+        string = args.writefile
+    fileNo = 1
+    while found != True:
+        string = "WriteOut" + str(fileNo) + ".json"
+        if not(os.path.isfile(string)):
+            file = True
+        else:
+            fileNo += 1
+
+    with open(string, "w") as outfile:
+        json.dump(AllBodies, outfile)
+
 
 if __name__ == '__main__':
     main()
