@@ -10,55 +10,55 @@ A Satellite has xyz-coordinates, xyz-velocity, mass, name.
 
 The data is stored in the instance of the spacial body, in this way:
 
-Star.body.sd._x
-            ._y
-            ._z
-            ._vx
-            ._vy
-            ._vz
-         ._rad
-         ._mass
+Star._x
+    ._y
+    ._z
+    ._vx
+    ._vy
+    ._vz
+    ._rad
+    ._mass
     ._surtemp
     ._name
 
-Planet.body.sd._x
-              ._y
-              ._z
-              ._vx
-              ._vy
-              ._vz
-           ._rad
-           ._mass
+Planet._x
+      ._y
+      ._z
+      ._vx
+      ._vy
+      ._vz
+      ._rad
+      ._mass
       ._surtemp
       ._surpre
       ._name
 
-Moon.body.sd._x
-            ._y
-            ._z
-            ._vx
-            ._vy
-            ._vz
-         ._rad
-         ._mass
+Moon._x
+    ._y
+    ._z
+    ._vx
+    ._vy
+    ._vz
+    ._rad
+    ._mass
     ._surpre
     ._name
 
-Astroid.body.sd._x
-               ._y
-               ._z
-               ._vx
-               ._vy
-               ._vz
-            ._rad
-            ._mass
+Astroid._x
+       ._y
+       ._z
+       ._vx
+       ._vy
+       ._vz
+       ._rad
+       ._mass
        ._name
 
-Satellite.body.sd._x
-                 ._y
-                 ._z
-                 ._vx
-                 ._vy
-                 ._vz
-              ._mass
+Satellite._x
+         ._y
+         ._z
+         ._vx
+         ._vy
+         ._vz
+         ._mass
          ._name
