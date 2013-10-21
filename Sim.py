@@ -10,23 +10,16 @@ import GBodies
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--readfile", help="Set the input file")
-    parser.add_argument("-w", "--writefile", help="Set the output file")
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument("-ts", "--seconds", help="Set the simulation time in seconds")
-    group.add_argument("-tm", "--minutes", help="Set the simulation time in minutes")
-    group.add_argument("-th", "--hours", help="Set the simulation time in hours")
-    group.add_argument("-td", "--days", help="Set the simulation time in days")
-    group.add_argument("-ty", "--years", help="Set the simulation time in years")
+    parser.add_argument("-i", "--input", help="Set the input file. Default is Bodies.json", default="Bodies.json")
+    parser.add_argument("-w", "--writefile", help="Set the output file. Default is next WriteOut.json file")
+    parser.add_argument("-p", "--precision", type=float, help="Set the precision rate, in seconds. Default is one second", default=1.)
+    parser.add_argument("-wdt","--writeDtime", type=int, help="Set the dt for the output data, in seconds. Default is one hour", default=3600)
     args = parser.parse_args()
-    print args
+    print "arguments: ", args
 
-    if args.readfile == None:
-        readfile = "Bodies.json"
-    else:
-        readfile = args.readfile
+    input = args.input
 
-    with open(readfile, 'r') as f:
+    with open(input, 'r') as f:
         data = json.load(f)
 
     print json.dumps(data, sort_keys=True, indent=4, separators=(',', ':'))
@@ -52,17 +45,84 @@ def main():
     for moon in jsonMoons:
         moons.append(GBodies.Moon.deserialize(moon))
 
-    astroids = []
-    jsonAstroids = data["Astroids"]
-    print "Astroids: {data}".format(data = jsonAstroids)
-    for astroid in jsonAstroids:
-        astroids.append(GBodies.Astroid.deserialize(astroid))
+    asteroids = []
+    jsonasteroids = data["Asteroids"]
+    print "asteroids: {data}".format(data = jsonasteroids)
+    for asteroid in jsonasteroids:
+        asteroids.append(GBodies.Asteroid.deserialize(asteroid))
 
     satellites = []
     jsonSatellites = data["Satellites"]
     print "Satellites: {data}".format(data = jsonSatellites)
     for satellite in jsonSatellites:
         satellites.append(GBodies.Satellite.deserialize(satellite))
+
+
+    dt = float(args.writedtime)
+    time = 0.
+    timestep = args.precision
+    while dt >= time:
+        time += timestep
+        for star in stars:
+            for starlevel2 in stars:
+                star.accelerate(starlevel2, GravityConstant)
+
+            for planetlevel2 in planets:
+                star.accelerate(planetlevel2, GravityConstant)
+                planetlevel2.accelerate(star, GravityConstant)
+
+            for moonlevel2 in moons:
+                star.accelerate(moonlevel2, GravityConstant)
+                moonlevel2.accelerate(star, GravityConstant)
+
+            for asteroidlevel2 in asteroids:
+                star.accelerate(asteroidlevel2, GravityConstant)
+                asteroidlevel2.accelerate(star, GravityConstant)
+
+            for satellitelevel2 in satellites:
+                star.accelerate(satellitelevel2, GravityConstant)
+                satellitelevel2.accelerate(star, GravityConstant)
+
+        for planet in planets:
+            for planetlevel2 in planets:
+                planet.accelerate(planetlevel2, GravityConstant)
+
+            for moonlevel2 in moons:
+                planet.accelerate(moonlevel2, GravityConstant)
+                moonlevel2.accelerate(planet, GravityConstant)
+
+            for asteroidlevel2 in aseteroids:
+                planet.accelerate(asteroidlevel2, GravityConstant)
+                asteroidlevel2.accelerate(planet, GravityConstant)
+
+            for satellitelevel2 in satellites:
+                planet.accelerate(satellitelevel2, GravityConstant)
+                satellitelevel2.accelerate(planet, GravityConstant)
+
+        for moon in moons:
+            for moonlevel2 in moons:
+                moon.accelerate(moonlevel2, GravityConstant)
+
+            for asteroidlevel2 in asteroids:
+                moon.accelerate(asteroidlevel2, GravityConstant)
+                asteroidlevel2.accelerate(moon, GravityConstant)
+
+            for satellitelevel2 in satellites:
+                moon.accelerate(satellitelevel2, GravityConstant)
+                satellitelevel2.accelerate(moon, GravityConstant)
+
+        for asteroid in asteroids:
+            for asteroidlevel2 in asteroids:
+                asteroid.accelerate(asteroidlevel2, GravityConstant)
+
+            for satellitelevel2 in satellites:
+                asteroid.accelerate(satellitelevel2, GravityConstant)
+                satellitelevel2.accelerate(asteroid, GravityConstant)
+
+        for satellite in satellites:
+            for satellitelevel2 in satellites:
+                satellite.accelerate(satellitelevel2, GravityConstant)
+
 
 
 
@@ -77,34 +137,33 @@ def main():
         moondata.append(moon.serialize())
     for planet in planets:
         plandata.append(planet.serialize())
-    for astroid in astroids:
-        astrdata.append(astroid.serialize())
+    for asteroid in asteroids:
+        astrdata.append(asteroid.serialize())
     for satellite in satellites:
         satedata.append(satellite.serialize())
     AllBodies = { "stars" : stardata,
                   "moons" : moondata,
                   "planets" : plandata,
-                  "astroids" : astrdata,
+                  "asteroids" : astrdata,
                   "satellites" : satedata,
                   }
     print AllBodies
 
     print "data: ", json.dumps(AllBodies)
 
-    if args.writefile == None:
-        found = False
-    else:
+    found = False
+    if not(args.writefile == None):
         found = True
-        string = args.writefile
+        filestring = args.writefile
     fileNo = 1
     while found != True:
-        string = "WriteOut" + str(fileNo) + ".json"
+        filestring = "WriteOut" + str(fileNo) + ".json"
         if not(os.path.isfile(string)):
-            file = True
+            found = True
         else:
             fileNo += 1
 
-    with open(string, "w") as outfile:
+    with open(filestring, "w") as outfile:
         json.dump(AllBodies, outfile)
 
 

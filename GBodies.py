@@ -75,7 +75,7 @@ class Body(SpatialData):
         return force
 
     def accelerate(self, body, Gc):
-        Acc = CalcForce(body, Gc)
+        force = CalcForce(body, Gc)
         self._ax += force*delta(self._x, body._x)/distance(body)
         self._ay += force*delta(self._y, body._y)/distance(body)
         self._az += force*delta(self._z, body._z)/distance(body)
@@ -234,14 +234,14 @@ class Star(Body):
                     data["name"])
 
 
-class Astroid(Body):
+class Asteroid(Body):
     def __init__(self, x, y, z, vx, vy, vz, mass, radius, name):
         super(Star, self).__init__(x, y, z, vx, vy, vz, mass)
         self._rad = radius
         self._name = name
 
     def __repr__(self):
-        return " Astroid: {name} \n radius: {rad} \n{data}".format(
+        return " asteroid: {name} \n radius: {rad} \n{data}".format(
             name = self._name,
             rad = self._rad,
             data = super(Star, self).__repr__())
@@ -256,7 +256,7 @@ class Astroid(Body):
     def deserialize(data):
         bdata = data["body"]
         spdata = bdata["SpatialData"]
-        return Astroid(spdata["x"],
+        return Asteroid(spdata["x"],
                        spdata["y"],
                        spdata["z"],
                        spdata["vx"],
