@@ -7,6 +7,93 @@ import os.path
 import json
 import GBodies
 
+def Simulate(data, time, GravityConstant):
+    stars = data["stars"]
+    planets = data["planets"]
+    moons = data["moons"]
+    asteroids = data["asteroids"]
+    satellites = data["satellites"]
+    for star in stars:
+        for starlevel2 in stars:
+            star.accelerate(starlevel2, GravityConstant)
+
+        for planetlevel2 in planets:
+            star.accelerate(planetlevel2, GravityConstant)
+            planetlevel2.accelerate(star, GravityConstant)
+
+        for moonlevel2 in moons:
+            star.accelerate(moonlevel2, GravityConstant)
+            moonlevel2.accelerate(star, GravityConstant)
+
+        for asteroidlevel2 in asteroids:
+            star.accelerate(asteroidlevel2, GravityConstant)
+            asteroidlevel2.accelerate(star, GravityConstant)
+
+        for satellitelevel2 in satellites:
+            star.accelerate(satellitelevel2, GravityConstant)
+            satellitelevel2.accelerate(star, GravityConstant)
+
+    for planet in planets:
+        for planetlevel2 in planets:
+            planet.accelerate(planetlevel2, GravityConstant)
+
+        for moonlevel2 in moons:
+            planet.accelerate(moonlevel2, GravityConstant)
+            moonlevel2.accelerate(planet, GravityConstant)
+
+        for asteroidlevel2 in aseteroids:
+            planet.accelerate(asteroidlevel2, GravityConstant)
+            asteroidlevel2.accelerate(planet, GravityConstant)
+
+        for satellitelevel2 in satellites:
+            planet.accelerate(satellitelevel2, GravityConstant)
+            satellitelevel2.accelerate(planet, GravityConstant)
+
+    for moon in moons:
+        for moonlevel2 in moons:
+            moon.accelerate(moonlevel2, GravityConstant)
+
+        for asteroidlevel2 in asteroids:
+            moon.accelerate(asteroidlevel2, GravityConstant)
+            asteroidlevel2.accelerate(moon, GravityConstant)
+
+        for satellitelevel2 in satellites:
+            moon.accelerate(satellitelevel2, GravityConstant)
+            satellitelevel2.accelerate(moon, GravityConstant)
+
+    for asteroid in asteroids:
+        for asteroidlevel2 in asteroids:
+            asteroid.accelerate(asteroidlevel2, GravityConstant)
+
+        for satellitelevel2 in satellites:
+            asteroid.accelerate(satellitelevel2, GravityConstant)
+            satellitelevel2.accelerate(asteroid, GravityConstant)
+
+    for satellite in satellites:
+        for satellitelevel2 in satellites:
+            satellite.accelerate(satellitelevel2, GravityConstant)
+
+    for star in stars:
+        star.update()
+    for planet in planets:
+        planet.update()
+    for moon in moons:
+        moon.update()
+    for asteroid in asteroids:
+        asteroid.update()
+    for satellite in satellites:
+        satellite.update()
+
+    data = { "stars" : stars,
+             "planets" : planets,
+             "moons" : moons,
+             "asteroids" : asteroids,
+             "satellites" : satellites,
+            }
+
+    return data
+
+
 def main():
 
     parser = argparse.ArgumentParser()
@@ -57,71 +144,19 @@ def main():
     for satellite in jsonSatellites:
         satellites.append(GBodies.Satellite.deserialize(satellite))
 
+    data = { "stars" : stars,
+             "planets" : planets,
+             "moons" : moons,
+             "asteroids" : asteroids,
+             "satellites" : satellites,
+            }
 
     dt = float(args.writedtime)
     time = 0.
     timestep = args.precision
     while dt >= time:
         time += timestep
-        for star in stars:
-            for starlevel2 in stars:
-                star.accelerate(starlevel2, GravityConstant)
-
-            for planetlevel2 in planets:
-                star.accelerate(planetlevel2, GravityConstant)
-                planetlevel2.accelerate(star, GravityConstant)
-
-            for moonlevel2 in moons:
-                star.accelerate(moonlevel2, GravityConstant)
-                moonlevel2.accelerate(star, GravityConstant)
-
-            for asteroidlevel2 in asteroids:
-                star.accelerate(asteroidlevel2, GravityConstant)
-                asteroidlevel2.accelerate(star, GravityConstant)
-
-            for satellitelevel2 in satellites:
-                star.accelerate(satellitelevel2, GravityConstant)
-                satellitelevel2.accelerate(star, GravityConstant)
-
-        for planet in planets:
-            for planetlevel2 in planets:
-                planet.accelerate(planetlevel2, GravityConstant)
-
-            for moonlevel2 in moons:
-                planet.accelerate(moonlevel2, GravityConstant)
-                moonlevel2.accelerate(planet, GravityConstant)
-
-            for asteroidlevel2 in aseteroids:
-                planet.accelerate(asteroidlevel2, GravityConstant)
-                asteroidlevel2.accelerate(planet, GravityConstant)
-
-            for satellitelevel2 in satellites:
-                planet.accelerate(satellitelevel2, GravityConstant)
-                satellitelevel2.accelerate(planet, GravityConstant)
-
-        for moon in moons:
-            for moonlevel2 in moons:
-                moon.accelerate(moonlevel2, GravityConstant)
-
-            for asteroidlevel2 in asteroids:
-                moon.accelerate(asteroidlevel2, GravityConstant)
-                asteroidlevel2.accelerate(moon, GravityConstant)
-
-            for satellitelevel2 in satellites:
-                moon.accelerate(satellitelevel2, GravityConstant)
-                satellitelevel2.accelerate(moon, GravityConstant)
-
-        for asteroid in asteroids:
-            for asteroidlevel2 in asteroids:
-                asteroid.accelerate(asteroidlevel2, GravityConstant)
-
-            for satellitelevel2 in satellites:
-                asteroid.accelerate(satellitelevel2, GravityConstant)
-                satellitelevel2.accelerate(asteroid, GravityConstant)
-
-        for satellite in satellites:
-            for satellitelevel2 in satellites:
-                satellite.accelerate(satellitelevel2, GravityConstant)
+        Simulate(data, timestep, GravityConstant)
 
 
 
