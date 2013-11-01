@@ -1,145 +1,113 @@
 {
     "GravityConstant": 6.67384e-11,
-    "Stars": [
+    "Objects": [
         {
             "name": "Sun",
+            "type": "Star",
             "SurfaceTemperature": 5.778,
-            "body": {
-                "radius": 696342000,
-                "mass": 1.9891e+30,
-                "SpatialData": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "vx": 0.0,
-                    "vy": 0.0,
-                    "vz": 0.0
-                }
-            }
-        }
-    ],
-    "Planets": [
+            "radius": 696342000,
+            "mass": 1.9891e+30,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "vx": 0.0,
+            "vy": 0.0,
+            "vz": 0.0
+        },
         {
             "name": "Mercury",
+            "type": "Planet",
             "SurfaceTemperature": 340,
             "SurfacePressure": 0,
-            "body": {
-                "radius": 2439.7,
-                "mass": 3.3022e+23,
-                "SpatialData": {
-                    "x": 1.0,
-                    "y": 2.0,
-                    "z": 3.0,
-                    "vx": 1.0,
-                    "vy": 2.0,
-                    "vz": 3.0
-                }
-            }
+            "radius": 2439.7,
+            "mass": 3.3022e+23,
+            "x": 1.0,
+            "y": 2.0,
+            "z": 3.0,
+            "vx": 1.0,
+            "vy": 2.0,
+            "vz": 3.0
         },
         {
             "name": "Venus",
+            "type": "Planet",
             "SurfaceTemperature": 737,
             "SurfacePressure": 9200000,
-            "body": {
-                "radius": 6051.8,
-                "mass": 4.8676e+24,
-                "SpatialData": {
-                    "x": 1.0,
-                    "y": 2.0,
-                    "z": 3.0,
-                    "vx": 1.0,
-                    "vy": 2.0,
-                    "vz": 3.0
-                }
-            }
+            "radius": 6051.8,
+            "mass": 4.8676e+24,
+            "x": 1.0,
+            "y": 2.0,
+            "z": 3.0,
+            "vx": 1.0,
+            "vy": 2.0,
+            "vz": 3.0
         },
         {
             "name": "Earth",
+            "type": "Planet",
             "SurfaceTemperature": 288,
             "SurfacePressure": 101325,
-            "body": {
-                "radius": 6371,
-                "mass": 5.97219e+24,
-                "SpatialData": {
-                    "x": 1.0,
-                    "y": 2.0,
-                    "z": 3.0,
-                    "vx": 3.0,
-                    "vy": 2.0,
-                    "vz": 1.0
-                }
-            }
+            "radius": 6371,
+            "mass": 5.97219e+24,
+            "x": 1.0,
+            "y": 2.0,
+            "z": 3.0,
+            "vx": 3.0,
+            "vy": 2.0,
+            "vz": 1.0
         },
         {
             "name": "Mars",
+            "type":"Planet",
             "SurfaceTemperature": 210,
             "SurfacePressure": 636,
-            "body": {
-                "radius": 3396.2,
-                "mass": 6.4185e+23,
-                "SpatialData": {
-                    "x": 3.0,
-                    "y": 2.0,
-                    "z": 1.0,
-                    "vx": 3.0,
-                    "vy": 2.0,
-                    "vz": 1.0
-                }
-            }
-        }
-    ],
-    "Moons": [
+            "radius": 3396.2,
+            "mass": 6.4185e+23,
+            "x": 3.0,
+            "y": 2.0,
+            "z": 1.0,
+            "vx": 3.0,
+            "vy": 2.0,
+            "vz": 1.0
+        },
         {
             "name": "Moon",
+            "type": "Moon",
             "SurfacePressure": 0,
-            "body": {
-                "radius": 1737.1,
-                "mass": 7.3477e+22,
-                "SpatialData": {
-                    "x": 1.0,
-                    "y": 2.0,
-                    "z": 3.0,
-                    "vx": 1.0,
-                    "vy": 2.0,
-                    "vz": 3.0
-                }
-            }
+            "radius": 1737.1,
+            "mass": 7.3477e+22,
+            "x": 1.0,
+            "y": 2.0,
+            "z": 3.0,
+            "vx": 1.0,
+            "vy": 2.0,
+            "vz": 3.0
         },
         {
             "name": "Phobos",
+            "type": "Moon",
             "SurfacePressure": 0,
-            "body": {
-                "radius": 11.1,
-                "mass": 10720000000000000,
-                "SpatialData": {
-                    "x": 3.0,
-                    "y": 2.0,
-                    "z": 1.0,
-                    "vx": 3.0,
-                    "vy": 2.0,
-                    "vz": 1.0
-                }
-            }
+            "radius": 11.1,
+            "mass": 10720000000000000,
+            "x": 3.0,
+            "y": 2.0,
+            "z": 1.0,
+            "vx": 3.0,
+            "vy": 2.0,
+            "vz": 1.0
         },
         {
             "name": "Deimos",
+            "type": "Moon",
             "SurfacePressure": 0,
-            "body": {
-                "radius": 6.2,
-                "mass": 1480000000000000,
-                "SpatialData": {
-                    "x": 1.0,
-                    "y": 2.0,
-                    "z": 3.0,
-                    "vx": 1.0,
-                    "vy": 2.0,
-                    "vz": 3.0
-                }
-            }
+            "radius": 6.2,
+            "mass": 1480000000000000,
+            "x": 1.0,
+            "y": 2.0,
+            "z": 3.0,
+            "vx": 1.0,
+            "vy": 2.0,
+            "vz": 3.0
         }
-    ],
-    "Asteroids": [
-    ],
-    "Satellites": [
     ]
 }
