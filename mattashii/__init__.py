@@ -5,6 +5,7 @@ import models
 import controllers
 import view
 import get_object
+import argparse
 
 
 def main():
@@ -29,9 +30,9 @@ def main():
     GravityConstant = gc = data["GravityConstant"]
     print "Gravitational Constant: {Gc}".format(Gc = GravityConstant)
 
-    Objects = data["objects"]
+    Objects = data["Objects"]
 
-    dt = float(args.writedtime)
+    dt = float(args.writeDtime)
     time = 0.
     timestep = args.precision
     while dt >= time:

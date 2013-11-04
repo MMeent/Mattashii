@@ -1,5 +1,3 @@
-import GBodies
-
 def by_name(data, n):
     for obj in data:
         if obj["name"] == n:

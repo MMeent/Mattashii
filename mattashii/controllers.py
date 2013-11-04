@@ -6,6 +6,7 @@ import models
 
 def simulate(objects, dt, Gc):
     for obj in objects:
+        body.reset_acceleration(obj)
         for object in objects:
             body.accelerate(obj, object, Gc)
     for obj in objects:
@@ -27,6 +28,11 @@ class body (object):
     def accelerate(obj, object, Gc):
         force = view.force(obj, object, Gc)
         distance = view.distance(obj, object)
-        obj["ax"] += force*(obj["x"] - object["x"])/distance
-        obj["ay"] += force*(obj["_y"] - object["_y"])/distance
-        obj["az"] += force*(obj["_z"] - object["_z"])/distance
+        if distance != 0:
+            obj["ax"] += force*(obj["x"] - object["x"])/distance
+            obj["ay"] += force*(obj["y"] - object["y"])/distance
+            obj["az"] += force*(obj["z"] - object["z"])/distance
+
+    @staticmethod
+    def reset_acceleration(obj):
+        obj["ax"], obj["ay"], obj["az"] = 0., 0., 0.

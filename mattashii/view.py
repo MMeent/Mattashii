@@ -2,13 +2,14 @@ import math
 import controllers
 
 
-@staticmethod
 def force(obj, object, Gc):
-    delta = Body.distance(obj, object)
-    force = Gc * obj["mass"] * object["mass"] / (delta*delta)
+    delta = distance(obj, object)
+    if delta != 0:
+        force = Gc * obj["mass"] * object["mass"] / (delta*delta)
+    else:
+        force = 0
     return force
 
-@staticmethod
 def distance(obj, object):
     dx = obj["x"] - object["x"]
     dy = obj["y"] - object["y"]
