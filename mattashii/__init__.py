@@ -6,6 +6,7 @@ import controllers
 import view
 import get_object
 import argparse
+import os
 
 
 def main():
@@ -37,9 +38,9 @@ def main():
     timestep = args.precision
     while dt >= time:
         time += timestep
-        objects = controllers.simulate(Objects, timestep, gc)
+        Objects = controllers.simulate(Objects, timestep, gc)
 
-    print objects
+    print Objects
 
     # Gets the proper write file
 
@@ -56,7 +57,7 @@ def main():
             fileNo += 1
 
     with open(filestring, "w") as outfile:
-        json.dump(AllBodies, outfile)
+        json.dump(Objects, outfile)
 
 if __name__ == "__main__":
     main()
