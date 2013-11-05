@@ -15,3 +15,4 @@ def distance(obj, object):
     dy = obj["y"] - object["y"]
     dz = obj["z"] - object["z"]
     return math.sqrt(dx**2 + dy**2 + dz **2)
+
