@@ -7,49 +7,19 @@ import default
 import argparse
 import os
 
-
 def main(inputFile, writeFile, precision, writeDTime):
 
-    # Input file processing
-    if inputFile != None:
-        with open(inputFile, 'r') as f:
-            data = json.load(f)
-        print json.dumps(data, sort_keys=True, indent=4, separators=(',', ':'))
-    else:
-        data = {"Help": "None"}
-        print "No input filename given. Using this data instead: {data}".format(data=data)
+    # Get the data
 
-    # Sets gravitational constant from imported file for calculations
-
-    try:
-        GravityConstant = gc = data["GravityConstant"]
-    except:
-        print "No gravitational constant included in input file. Using default instead. ({GC})".format(GC=default.GravityConstant())
-        GravityConstant = gc = default.GravityConstant()
-
-    print "Gravitational Constant: {Gc}".format(Gc = GravityConstant)
+    data = controllers.open(inputFile)
 
     # Sets some variables
 
-    try:
-        Objects = data["Objects"]
-    except:
-        print "No objects included in input file. Using default list instead."
-        Objects = default.Objects()
-
-    try:
-        dt = float(writeDTime)
-    except:
-        dt = default.writeDTime()
-        print "No write time found. Using default instead. ({delta})".format(delta=dt)
-
-    try:
-        timeStep = float(precision)
-    except:
-        timeStep = default.timeStep()
-        print "No precision found. Using default instead. ({pr})".format(pr=timeStep)
-
-    time = 0.
+    gc = controllers.variables.set_gconst(data) # Gravitational Constant
+    Objects = controllers.variables.set_objects(data) # Objects list
+    dt = controllers.variables.set_dt(writeDTime) # Output time
+    timeStep = controllers.variables.set_timeStep(precision) # Time step used in simulation
+    time = 0. # Time simulation started
 
     # This part does the magic: the simulation happens here
 
@@ -63,25 +33,15 @@ def main(inputFile, writeFile, precision, writeDTime):
 
     # Gets the proper write file
 
-    found = False
-    if not(writeFile == None):
-        found = True
-        fileString = writeFile
-    fileNo = 1
-    while found != True:
-        fileString = "WriteOut" + str(fileNo) + ".json"
-        if not(os.path.isfile(fileString)):
-            found = True
-        else:
-            fileNo += 1
+    fileString = view.getFileString(writeFile)
 
     # Write the data to the writefile
 
-    try:
-        with open(fileString, "w") as outfile:
-            json.dump(Objects, outfile)
-    except:
-        print "problems with writing to file named \"{file}\"".format(file = fileString)
+    view.write(Objects, fileString)
+
+    #return the objects list
+
+    return fileString
 
 if __name__ == "__main__":
 

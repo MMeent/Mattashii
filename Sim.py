@@ -4,8 +4,6 @@ import mattashii
 import argparse
 
 def main():
-
-
     # Argument parsing
 
     parser = argparse.ArgumentParser()
