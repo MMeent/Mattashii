@@ -1,6 +1,9 @@
-import math
-import controllers
 import json
+
+from math import sqrt
+
+import view
+import controllers
 
 def getFileString(writeFileString):
     """ Gets the write file file string. If none, it'll calculate the next write file file string. """
@@ -35,7 +38,7 @@ def distance(obj, object):
     dx = obj["x"] - object["x"]
     dy = obj["y"] - object["y"]
     dz = obj["z"] - object["z"]
-    return math.sqrt(dx**2 + dy**2 + dz **2)
+    return sqrt(dx**2 + dy**2 + dz **2)
 
 
 def write(data, file):

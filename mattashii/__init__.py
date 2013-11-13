@@ -1,11 +1,15 @@
+
+
 import json
+
+from argparse import ArgumentParser
+
 import models
-import controllers
 import view
+import controllers
+
 import get_object
 import default
-import argparse
-import os
 
 def main(inputFile, writeFile, precision, writeDTime):
 
@@ -47,7 +51,7 @@ if __name__ == "__main__":
 
     # Argument parsing
 
-    parser = argparse.ArgumentParser()
+    parser = ArgumentParser()
     parser.add_argument("-i", "--input", help="Set the input file. Default is Bodies.json", default="Bodies.json")
     parser.add_argument("-w", "--writefile", help="Set the output file. Default is next WriteOut.json file")
     parser.add_argument("-p", "--precision", type=float, help="Set the precision rate, in seconds. Default is one second", default=1.)

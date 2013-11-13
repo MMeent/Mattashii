@@ -1,10 +1,10 @@
 __author__ = 'matthias'
 
-import math
+import json
+
 import view
 import models
 import default
-import json
 
 def openJson(inputFile):
     """ Opens the json file with filename 'inputFile'. If none, it'll use the default instead. """
