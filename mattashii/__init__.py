@@ -15,7 +15,7 @@ def main(inputFile, writeFile, precision, writeDTime):
 
     # Get the data
 
-    data = controllers.open(inputFile)
+    data = controllers.openJson(inputFile)
 
     # Sets some variables
 
