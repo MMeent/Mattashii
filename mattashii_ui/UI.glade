@@ -30,7 +30,7 @@
   <object class="GtkEntryBuffer" id="entrybuffer1"/>
   <object class="GtkWindow" id="mattashii_main">
     <property name="width_request">800</property>
-    <property name="height_request">500</property>
+    <property name="height_request">480</property>
     <property name="can_focus">False</property>
     <property name="border_width">2</property>
     <property name="title" translatable="yes">Mattashii - Simulating Galaxies</property>
@@ -53,12 +53,186 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkTreeView" id="treeview1">
+                  <object class="GtkBox" id="PlotInfoBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="model">PlotInfo</property>
-                    <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="treeview-selection1"/>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkBox" id="File">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="Flabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">File : </property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="Fvalue">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="Time">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="Tlabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Time Plot (s)</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="Tvalue">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="Precision">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="Plabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Precision (s)</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="Pvalue">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="Steps">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="Slabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Steps (n)</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="Svalue">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="box12">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
+                        <child>
+                          <object class="GtkLabel" id="label11">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">label</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label16">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">label</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
                     </child>
                   </object>
                 </child>
@@ -73,12 +247,24 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkTreeView" id="treeview2">
+                  <object class="GtkBox" id="box7">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="model">NewPlotData</property>
-                    <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="treeview-selection2"/>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>
@@ -311,7 +497,7 @@
                             <property name="model">Objects</property>
                             <property name="reorderable">True</property>
                             <property name="rules_hint">True</property>
-                            <signal name="select-cursor-row" handler="controllers.Update.TreeStores" swapped="no"/>
+                            <signal name="select-cursor-row" handler="on_Body1Treeview_select_cursor_row" object="mattashii_main" swapped="no"/>
                             <child internal-child="selection">
                               <object class="GtkTreeSelection" id="treeview-selection3"/>
                             </child>
@@ -339,6 +525,7 @@
                           <object class="GtkBox" id="B1HBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="homogeneous">True</property>
                             <child>
                               <object class="GtkBox" id="B1VBox1">
                                 <property name="visible">True</property>
@@ -567,6 +754,7 @@ Pressure (Pa) : </property>
                     <property name="width_request">240</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel" id="Difference">
@@ -584,6 +772,7 @@ Pressure (Pa) : </property>
                       <object class="GtkBox" id="box2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkBox" id="box4">
                             <property name="visible">True</property>
@@ -653,6 +842,18 @@ between (m) :</property>
                                 <property name="position">4</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkLabel" id="dSignal">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Signal Delay (s) :</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">5</property>
+                              </packing>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -668,7 +869,7 @@ between (m) :</property>
                             <property name="orientation">vertical</property>
                             <property name="homogeneous">True</property>
                             <child>
-                              <object class="GtkLabel" id="label7">
+                              <object class="GtkLabel" id="deltaMass">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -679,7 +880,7 @@ between (m) :</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label8">
+                              <object class="GtkLabel" id="deltaRadius">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -690,7 +891,7 @@ between (m) :</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label9">
+                              <object class="GtkLabel" id="deltaSurfaceTemperature">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -701,7 +902,7 @@ between (m) :</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label10">
+                              <object class="GtkLabel" id="deltaPressure">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -712,7 +913,7 @@ between (m) :</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="label11">
+                              <object class="GtkLabel" id="deltaDistance">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -720,6 +921,17 @@ between (m) :</property>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
                                 <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="deltaSignal">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">5</property>
                               </packing>
                             </child>
                           </object>
@@ -781,6 +993,7 @@ between (m) :</property>
                           <object class="GtkBox" id="B2HBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="homogeneous">True</property>
                             <child>
                               <object class="GtkBox" id="B2VBox1">
                                 <property name="visible">True</property>
@@ -998,6 +1211,7 @@ Pressure (Pa) : </property>
                             <property name="reorderable">True</property>
                             <property name="rules_hint">True</property>
                             <property name="search_column">0</property>
+                            <signal name="select-cursor-row" handler="on_Body2Treeview_select_cursor_row" object="mattashii_main" swapped="no"/>
                             <child internal-child="selection">
                               <object class="GtkTreeSelection" id="treeview-selection5"/>
                             </child>
