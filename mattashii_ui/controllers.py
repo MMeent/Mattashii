@@ -1,6 +1,6 @@
 __author__ = 'matthias'
 
-from mattashii import controllers
+import mattashii
 
 import view as view
 
@@ -13,12 +13,18 @@ class Update(object):
         Body2 = view.getSelected(go("Body2Treeview"))
 
 
-
     @staticmethod
     def Plot(window):
         pass
 
 class newSimulation(object):
     @staticmethod
-    def create():
+    def create(Window):
+        with open(mattashii.main(None, None, None, None)) as data:
+            NewWindow= newSimulation.Plot(data, Window)
+
+    @staticmethod
+    def Plot(data, plot):
         pass
+        NewWindow = Update.Plot(plot)
+        return NewWindow

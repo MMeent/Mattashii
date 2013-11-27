@@ -10,4 +10,5 @@ def handlers():
         "onDeleteWindow" : Gtk.main_quit,
         "on_Body1Treeview_select_cursor_row" : controllers.Update.TreeStores,
         "on_Body2Treeview_select_cursor_row" : controllers.Update.TreeStores,
+        "on_PlotButton_clicked" : controllers.newSimulation.create,
     }
