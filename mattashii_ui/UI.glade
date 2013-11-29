@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkListStore" id="PlotInfo">
-    <columns>
-      <!-- column-name item -->
-      <column type="gchar"/>
-      <!-- column-name gegevens -->
-      <column type="gchar"/>
-    </columns>
-  </object>
   <object class="GtkListStore" id="NewPlotData">
     <columns>
       <!-- column-name Item -->
@@ -27,7 +19,41 @@
       <column type="gint"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="PlotInfo">
+    <columns>
+      <!-- column-name item -->
+      <column type="gchar"/>
+      <!-- column-name gegevens -->
+      <column type="gchar"/>
+    </columns>
+  </object>
+  <object class="GtkAdjustment" id="adjustment3">
+    <property name="lower">1</property>
+    <property name="upper">20</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment1">
+    <property name="lower">1</property>
+    <property name="upper">8760</property>
+    <property name="value">12</property>
+    <property name="step_increment">12</property>
+    <property name="page_increment">12</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="lower">1</property>
+    <property name="upper">3600</property>
+    <property name="value">5</property>
+    <property name="step_increment">5</property>
+    <property name="page_increment">5</property>
+  </object>
   <object class="GtkEntryBuffer" id="entrybuffer1"/>
+  <object class="GtkFileFilter" id="filefilter1">
+    <patterns>
+      <pattern>*.json</pattern>
+    </patterns>
+  </object>
   <object class="GtkWindow" id="mattashii_main">
     <property name="width_request">800</property>
     <property name="height_request">480</property>
@@ -102,7 +128,7 @@
                           <object class="GtkLabel" id="Tlabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Time Plot (s)</property>
+                            <property name="label" translatable="yes">Time Plot (h)</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -209,6 +235,17 @@
                         <property name="position">4</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkLabel" id="label9">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
                   </object>
                 </child>
                 <child type="tab">
@@ -228,15 +265,16 @@
                     <property name="orientation">vertical</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkBox" id="NewFile">
+                      <object class="GtkBox" id="box7">
+                        <property name="width_request">300</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">True</property>
                         <child>
-                          <object class="GtkLabel" id="NewFlabel">
+                          <object class="GtkLabel" id="file">
+                            <property name="width_request">125</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">File : </property>
+                            <property name="label" translatable="yes"> File : </property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -245,14 +283,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="NewFvalue">
+                          <object class="GtkFileChooserButton" id="FileChosen">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <property name="filter">filefilter1</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
@@ -266,12 +306,12 @@
                       <object class="GtkBox" id="NewTime">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel" id="NewTlabel">
+                            <property name="width_request">125</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Time Plot (s)</property>
+                            <property name="label" translatable="yes">Time Plot (h)</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -280,12 +320,17 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="NewTvalue">
+                          <object class="GtkScale" id="TimePlot">
+                            <property name="width_request">175</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="adjustment">adjustment1</property>
+                            <property name="lower_stepper_sensitivity">on</property>
+                            <property name="upper_stepper_sensitivity">on</property>
+                            <property name="digits">0</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
@@ -301,9 +346,9 @@
                       <object class="GtkBox" id="NewPrecision">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel" id="NewPlabel">
+                            <property name="width_request">125</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Precision (s)</property>
@@ -315,12 +360,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="NewPvalue">
+                          <object class="GtkScale" id="PrecisionSlide">
+                            <property name="width_request">175</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="adjustment">adjustment2</property>
+                            <property name="digits">0</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
@@ -336,9 +384,9 @@
                       <object class="GtkBox" id="NewSteps">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel" id="NewSlabel">
+                            <property name="width_request">125</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Steps (n)</property>
@@ -350,12 +398,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="NewSvalue">
+                          <object class="GtkScale" id="StepsSlide">
+                            <property name="width_request">175</property>
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="adjustment">adjustment3</property>
+                            <property name="digits">0</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
@@ -368,12 +419,49 @@
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkBox" id="OutputFile">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkLabel" id="NewFlabel1">
+                            <property name="width_request">125</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Output File Name</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="OutFile">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">•</property>
+                            <property name="text" translatable="yes">Default</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox" id="box6">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel" id="label8">
+                            <property name="width_request">125</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                           </object>
@@ -392,10 +480,10 @@
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
                             <property name="image_position">top</property>
-                            <signal name="clicked" handler="on_PlotButton_clicked" swapped="no"/>
+                            <signal name="clicked" handler="on_PlotButton_clicked" object="NewPlotInfo" swapped="no"/>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
@@ -404,7 +492,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                   </object>
@@ -438,11 +526,13 @@
             </child>
             <child>
               <object class="GtkBox" id="RenderBox">
+                <property name="width_request">300</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
+                    <property name="width_request">300</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="vexpand">True</property>
