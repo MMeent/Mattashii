@@ -15,11 +15,12 @@ def main():
     parser.add_argument("-wdt","--writeDTime", type=int, help="Set the dt for the output data, in seconds. Default is one hour", default=3600)
     parser.add_argument("-ng", "--nogui", help="No graphical user interface, just simulate the f*ck out of here", default=False, action="store_true")
     args = parser.parse_args()
-    print "arguments: ", args
 
     if args.nogui == False:
+        print "Mattashii UI Initiated"
         window = mattashii_ui.main()
     else:
+        print "arguments chosen: ", args
         mattashii.main(args.input, args.writefile, args.precision, args.writeDTime)
 
 

@@ -1,7 +1,7 @@
 __author__ = 'matthias'
 
 from gi.repository import Gtk
-import os
+from os import rename
 
 import mattashii
 
@@ -27,8 +27,6 @@ class newSimulation(object):
         for i in Items:
             for j in i:
                 name = Gtk.Buildable.get_name(j)
-                print name
-                print type(j)
                 if name == "FileChosen":
                     InFile = j.get_filename()
                 elif name == "OutFile":
@@ -43,16 +41,18 @@ class newSimulation(object):
         print type(OutFileName)
         print type(InFile)
 
+
         if OutFileName is "NoneType":
             OriginalOutFile = OutFileName = "Bodies.json"
-        if InFile is "NoneType":
+        if (InFile == "NoneType") or (InFile is None):
             InFile == "Bodies.json"
 
         print InFile, OutFileName, precision, TimePlot, Steps
         WriteDTime = TimePlot / Steps
         InFileName = InFile
 
-        with open(mattashii.main(InFileName, OutFileName + ".part1", precision, WriteDTime)) as data:
+        OutFileName = OutFileName + ".part1"
+        with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
             NewPlot = newSimulation.Plot(data, plot=None)
 
         for i in range(int(Steps) - 1):
@@ -62,7 +62,7 @@ class newSimulation(object):
             with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
                 NewPlot = newSimulation.Plot(data, plot=None)
 
-        os.rename(OutFileName, OriginalOutFile)
+        rename(OutFileName, OriginalOutFile)
 
     @staticmethod
     def Plot(data, plot):
