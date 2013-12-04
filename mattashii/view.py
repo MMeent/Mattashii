@@ -42,9 +42,11 @@ def distance(obj, object):
     return sqrt(dx**2 + dy**2 + dz **2)
 
 
-def write(data, file):
+def write(data, gc, file):
     """ Writes the data to a file, if possible. """
     try:
+        data = {"Objects": data,
+                "GravityConstant": gc}
         with open(file, "w") as outfile:
             json.dump(data, outfile)
     except:

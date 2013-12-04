@@ -34,7 +34,7 @@ class newSimulation(object):
                 elif name == "PrecisionSlide":
                     precision = j.get_value()
                 elif name == "TimePlot":
-                    TimePlot = j.get_value()
+                    TimePlot = j.get_value() * 3600
                 elif name == "StepsSlide":
                     Steps = j.get_value()
 

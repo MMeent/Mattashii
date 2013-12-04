@@ -41,7 +41,7 @@ def main(inputFile, writeFile, precision, writeDTime):
 
     # Write the data to the writefile
 
-    view.write(Objects, fileString)
+    view.write(Objects, gc, fileString)
 
     #return the objects list
 
