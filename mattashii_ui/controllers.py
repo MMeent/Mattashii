@@ -1,6 +1,7 @@
 __author__ = 'matthias'
 
 from gi.repository import Gtk
+import os
 
 import mattashii
 
@@ -31,23 +32,37 @@ class newSimulation(object):
                 if name == "FileChosen":
                     InFile = j.get_filename()
                 elif name == "OutFile":
-                    OutFileName = j.get_text()
+                    OriginalOutFile = OutFileName = j.get_text()
                 elif name == "PrecisionSlide":
                     precision = j.get_value()
                 elif name == "TimePlot":
                     TimePlot = j.get_value()
                 elif name == "StepsSlide":
-                    Steps = int(j.get_value())
-        if OutFileName == None:
-            OutFileName = "Bodies"
-        if InFile == None:
+                    Steps = j.get_value()
+
+        print type(OutFileName)
+        print type(InFile)
+
+        if OutFileName is "NoneType":
+            OriginalOutFile = OutFileName = "Bodies.json"
+        if InFile is "NoneType":
             InFile == "Bodies.json"
+
         print InFile, OutFileName, precision, TimePlot, Steps
         WriteDTime = TimePlot / Steps
-        for i in range(Steps):
-            InFileName = InFile + i + ".json"
+        InFileName = InFile
+
+        with open(mattashii.main(InFileName, OutFileName + ".part1", precision, WriteDTime)) as data:
+            NewPlot = newSimulation.Plot(data, plot=None)
+
+        for i in range(int(Steps) - 1):
+            print i
+            InFileName = InFile + ".step" +  str(i + 1)
+            OutFileName = OutFileName + ".step" + str(i + 1)
             with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
-                NewPlot = newSimulation.Plot(data, plot)
+                NewPlot = newSimulation.Plot(data, plot=None)
+
+        os.rename(OutFileName, OriginalOutFile)
 
     @staticmethod
     def Plot(data, plot):
