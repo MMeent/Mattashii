@@ -43,22 +43,22 @@ class newSimulation(object):
 
 
         if OutFileName is "NoneType":
-            OriginalOutFile = OutFileName = "Bodies.json"
+            OriginalOutFile = OutFileName = "mattashii/Bodies.json"
         if (InFile == "NoneType") or (InFile is None):
-            InFile == "Bodies.json"
+            InFile == "mattashii/Bodies.json"
 
         print InFile, OutFileName, precision, TimePlot, Steps
         WriteDTime = TimePlot / Steps
         InFileName = InFile
 
-        OutFileName = OutFileName + ".part1"
+        OutFileName = OutFileName + ".step1"
         with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
             NewPlot = newSimulation.Plot(data, plot=None)
 
-        for i in range(int(Steps) - 1):
+        for i in range(int(Steps)):
             print i
-            InFileName = InFile + ".step" +  str(i + 1)
-            OutFileName = OutFileName + ".step" + str(i + 1)
+            InFileName = OutFileName
+            OutFileName = OriginalOutFile + ".step" + str(i + 1)
             with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
                 NewPlot = newSimulation.Plot(data, plot=None)
 
