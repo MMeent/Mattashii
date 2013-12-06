@@ -1,4 +1,4 @@
-__author__ = 'matthias'
+__author__ = 'mattashii'
 
 from gi.repository import Gtk
 from os import rename
@@ -8,21 +8,29 @@ import mattashii
 import view as view
 
 class Update(object):
+    """This is the class created to contain the update methods, so that I can update the different things
+    that i have to update"""
+
     @staticmethod
     def TreeStores(window):
+        """The method to update the treestores in the window. """
         pass
-        go = window.get_object
-        Body1 = view.getSelected(go("Body1Treeview"))
-        Body2 = view.getSelected(go("Body2Treeview"))
 
 
     @staticmethod
     def Plot(window):
+        """The method to update the plot. """
         pass
 
 class newSimulation(object):
+    """This is the class whose function it is to contain the methods for a new simulation, as the name suggests."""
+
     @staticmethod
     def create(Box):
+        """This method has the possibilities to create a new simulation. The box in what the data are has to be given
+        as an argument. Different steps are being saved with the .step(n) postfix. The last step is renamed to the
+        original output filename. """
+
         Items = Box.get_children()
         for i in Items:
             for j in i:
@@ -37,10 +45,6 @@ class newSimulation(object):
                     TimePlot = j.get_value() * 3600
                 elif name == "StepsSlide":
                     Steps = j.get_value()
-
-        print type(OutFileName)
-        print type(InFile)
-
 
         if OutFileName is "NoneType":
             OriginalOutFile = OutFileName = "mattashii/Bodies.json"
@@ -66,5 +70,6 @@ class newSimulation(object):
 
     @staticmethod
     def Plot(data, plot):
+        """This method creates a new plot for the plot window."""
         NewWindow = Update.Plot(plot)
         return NewWindow
