@@ -89,7 +89,7 @@
                       <object class="GtkBox" id="File">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">True</property>
+                        <property name="homogeneous">False</property>
                         <child>
                           <object class="GtkLabel" id="Flabel">
                             <property name="visible">True</property>
@@ -97,7 +97,7 @@
                             <property name="label" translatable="yes">File : </property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
+                            <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>

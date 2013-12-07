@@ -31,6 +31,14 @@ class newSimulation(object):
         as an argument. Different steps are being saved with the .step(n) postfix. The last step is renamed to the
         original output filename. """
 
+        # get the plot info box
+        Notebook = Box.get_parent()
+        for i in Notebook.get_children():
+            name = Gtk.Buildable.get_name(i)
+            if name == "PlotInfoBox":
+                OtherBox = i
+
+        # get the input data
         Items = Box.get_children()
         for i in Items:
             for j in i:
@@ -40,25 +48,53 @@ class newSimulation(object):
                 elif name == "OutFile":
                     OriginalOutFile = OutFileName = j.get_text()
                 elif name == "PrecisionSlide":
-                    precision = j.get_value()
+                    Precision = j.get_value()
                 elif name == "TimePlot":
                     TimePlot = j.get_value() * 3600
                 elif name == "StepsSlide":
                     Steps = j.get_value()
 
+        # correct errors
         if OutFileName is "NoneType":
             OriginalOutFile = OutFileName = "mattashii/Bodies.json"
         if (InFile == "NoneType") or (InFile is None):
             InFile == "mattashii/Bodies.json"
 
-        print InFile, OutFileName, precision, TimePlot, Steps
+        Items = OtherBox.get_children()
+        for i in Items:
+            name = Gtk.Buildable.get_name
+            iName = name(i)
+            try:
+                childs = i.get_children()
+                if iName == "File":
+                    for k in childs:
+                        if name(k) == "Fvalue":
+                            k.set_text(InFile)
+                elif iName == "Time":
+                    for k in childs:
+                        if name(k) == "Tvalue":
+                            k.set_text(str(TimePlot/3600))
+                elif iName == "Precision":
+                    for k in childs:
+                        if name(k) == "Pvalue":
+                            k.set_text(str(Precision))
+                elif iName == "Steps":
+                    for k in childs:
+                        if name(k) == "Svalue":
+                            k.set_text(str(Steps))
+            except:
+                pass
+
+        # debug
+        print InFile, OutFileName, Precision, TimePlot, Steps
         WriteDTime = TimePlot / Steps
         InFileName = InFile
 
         OutFileName = OutFileName + ".step1"
-        with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
+        with open(mattashii.main(InFileName, OutFileName, Precision, WriteDTime)) as data:
             NewPlot = newSimulation.Plot(data, plot=None)
 
+        # loop through steps
         for i in range(int(Steps)):
             print i
             InFileName = OutFileName
