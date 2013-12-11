@@ -13,7 +13,7 @@ class Update(object):
     that i have to update"""
 
     @staticmethod
-    def TreeStores(window):
+    def ListStores(window):
         """The method to update the treestores in the window. """
         pass
 
