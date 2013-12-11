@@ -2,6 +2,7 @@ __author__ = 'mattashii'
 
 from gi.repository import Gtk
 from os import rename
+from multiprocessing import Process
 
 import mattashii
 
@@ -26,7 +27,7 @@ class newSimulation(object):
     """This is the class whose function it is to contain the methods for a new simulation, as the name suggests."""
 
     @staticmethod
-    def create(Box):
+    def Create(Box):
         """This method has the possibilities to create a new simulation. The box in what the data are has to be given
         as an argument. Different steps are being saved with the .step(n) postfix. The last step is renamed to the
         original output filename. """
@@ -90,6 +91,17 @@ class newSimulation(object):
         WriteDTime = TimePlot / Steps
         InFileName = InFile
 
+        process = Process(target=newSimulation.Simulate, args=(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps))
+        process.start()
+
+    @staticmethod
+    def Plot(data, plot):
+        """This method creates a new plot for the plot window."""
+        NewWindow = Update.Plot(plot)
+        return NewWindow
+
+    @staticmethod
+    def Simulate(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps):
         OutFileName = OutFileName + ".step1"
         with open(mattashii.main(InFileName, OutFileName, Precision, WriteDTime)) as data:
             NewPlot = newSimulation.Plot(data, plot=None)
@@ -99,13 +111,8 @@ class newSimulation(object):
             print i
             InFileName = OutFileName
             OutFileName = OriginalOutFile + ".step" + str(i + 1)
-            with open(mattashii.main(InFileName, OutFileName, precision, WriteDTime)) as data:
+            with open(mattashii.main(InFileName, OutFileName, Precision, WriteDTime)) as data:
                 NewPlot = newSimulation.Plot(data, plot=None)
 
         rename(OutFileName, OriginalOutFile)
-
-    @staticmethod
-    def Plot(data, plot):
-        """This method creates a new plot for the plot window."""
-        NewWindow = Update.Plot(plot)
-        return NewWindow
+        print "I'm done processing"
