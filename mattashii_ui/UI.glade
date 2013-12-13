@@ -47,6 +47,7 @@
     <property name="title" translatable="yes">Mattashii - Simulating Galaxies</property>
     <property name="default_width">600</property>
     <property name="default_height">400</property>
+    <signal name="set-focus" handler="on_mattashii_main_set_focus" object="Info" swapped="no"/>
     <signal name="delete-event" handler="onDeleteWindow" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">

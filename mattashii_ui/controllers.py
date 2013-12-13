@@ -6,17 +6,52 @@ from multiprocessing import Process
 
 import mattashii
 
-import view as view
+import view
 
 class Update(object):
     """ This is the class created to contain the update methods, so that I can update the different things
     that i have to update"""
 
     @staticmethod
-    def ListStores(window):
-        """ The method to update the treestores in the window. """
-        pass
+    def Boxes(InfoBox, widget):
+        """ The method to update the Liststores in the window. """
+        name = Gtk.Buildable.get_name
+        child = view.get_child_by_name
+        print "hello"
+        try:
+            b1box = child(InfoBox, "Body 1 box")
+            b1info = child(b1box, "Body1info")
+            b1treeview = child(b1info, "Body1Treeview")
+            b1selection = view.getSelected(b1treeview)
+            b1hbox = child(b1info, "B1HBox")
+            b1info = child(b1hbox, "B1VBox2")
+            b1name = child(b1info, "B1Name")
+            b1type = child(b1info, "B1Type")
+            b1mass = child(b1info, "B1Mass")
+            b1radius = child(b1info, "B1Radius")
+            b1surtemp = child(b1info, "B1SurTemp")
+            b1surpre = child(b1info, "B1SurPre")
 
+            b2box = child(InfoBox, "Body 2 box")
+            b2info = child(b2box, "Body2info")
+            b2treeview = child(b2info, "Body2Treeview")
+            b2selection = view.getSelected(b2treeview)
+            b2hbox = child(b2info, "B2HBox")
+            b2info = child(b2hbox, "B2VBox2")
+            b2name = child(b2info, "B2Name")
+            b2type = child(b2info, "B2Type")
+            b2mass = child(b2info, "B2Mass")
+            b2radius = child(b2info, "B2Radius")
+            b2surtemp = child(b2info, "B2SurTemp")
+            b2surpre = child(b2info, "B2SurPre")
+
+
+            dbbox = child(InfoBox, "DifferenceBox")
+            dbinfo = child(dbbox, "DBox")
+            dbdata = child(dbinfo, "Data")
+
+        except:
+            pass
 
     @staticmethod
     def Plot(window):

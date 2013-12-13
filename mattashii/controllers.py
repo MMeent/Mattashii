@@ -3,8 +3,6 @@ __author__ = 'matthias'
 import json
 import os
 
-from multiprocessing import Process
-
 import view
 import models
 import default
@@ -23,8 +21,6 @@ def openJson(inputFile):
 def simulate(objects, dt, Gc):
     """ Simulates the universe. No, just kidding, but it's very close: the objects given will be simulated by this
     function. """
-    threads = []
-    no = 0
     for obj in objects:
         body.reset_acceleration(obj)
         for object in objects:
