@@ -10,7 +10,7 @@ import controllers
 
 
 def main():
-    """This is the main() for mattashii_ui, where galaxies are plotted using a gui. It first loads the UI.glade from
+    """ This is the main() for mattashii_ui, where galaxies are plotted using a gui. It first loads the UI.glade from
     the mattashii_ui folder, then connects the signals from the models.py, and lastly builds the main window."""
 
     builder = Gtk.Builder()

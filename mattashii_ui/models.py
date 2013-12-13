@@ -6,7 +6,7 @@ import controllers
 import view
 
 def handlers():
-    """This function returns the handlers to the connect to. """
+    """ This function returns the handlers to the connect to. """
 
     handlers = {
         "onDeleteWindow" : Gtk.main_quit,

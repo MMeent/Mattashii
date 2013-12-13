@@ -3,6 +3,8 @@ __author__ = 'matthias'
 import json
 import os
 
+from multiprocessing import Process
+
 import view
 import models
 import default
@@ -20,14 +22,27 @@ def openJson(inputFile):
 
 def simulate(objects, dt, Gc):
     """ Simulates the universe. No, just kidding, but it's very close: the objects given will be simulated by this
-    function. """
+    function. It uses multiprocessing to be able to handle larger amounts of data: the objects have not to wait for the
+    whole thread to be processed."""
+
+    threads = []
+    no = 0
     for obj in objects:
-        body.reset_acceleration(obj)
-        for object in objects:
-            body.accelerate(obj, object, Gc)
+        threads[no] = Process(simulateObject, args=(obj, objects, Gc))
+        threads[no].start()
+
+    for thread in threads:
+        thread.join()
+
     for obj in objects:
         body.update(obj, dt)
     return objects
+
+def simulateObject(object, objects, Gc):
+    """ This processes the simulation of an object. """
+    body.reset_acceleration(object)
+    for obj in objects:
+        body.accelerate(object, obj, Gc)
 
 
 class variables(object):
