@@ -709,7 +709,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkTreeView" id="treeview2">
+                          <object class="GtkTreeView" id="Body1Treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="model">Objects</property>
@@ -984,7 +984,7 @@ Pressure (Pa) : </property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="box2">
+                      <object class="GtkBox" id="DBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="homogeneous">True</property>
@@ -1077,7 +1077,7 @@ between (m) :</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="box5">
+                          <object class="GtkBox" id="Data">
                             <property name="width_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
@@ -1184,7 +1184,7 @@ between (m) :</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="Body 2 Box">
+                  <object class="GtkBox" id="Body 2 box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
@@ -1201,7 +1201,7 @@ between (m) :</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="Body2Info">
+                      <object class="GtkBox" id="Body2info">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
@@ -1419,7 +1419,7 @@ Pressure (Pa) : </property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkTreeView" id="treeview3">
+                          <object class="GtkTreeView" id="Body2Treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="model">Objects</property>

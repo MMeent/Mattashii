@@ -5,8 +5,11 @@ from os import rename
 from multiprocessing import Process
 
 import mattashii
+from mattashii import default
 
 import view
+
+from models import Set
 
 class Update(object):
     """ This is the class created to contain the update methods, so that I can update the different things
@@ -17,11 +20,13 @@ class Update(object):
         """ The method to update the Liststores in the window. """
         name = Gtk.Buildable.get_name
         child = view.get_child_by_name
+        data = default.Objects()
         print "hello"
         try:
             b1box = child(InfoBox, "Body 1 box")
             b1info = child(b1box, "Body1info")
             b1treeview = child(b1info, "Body1Treeview")
+            b1treeview = Set.BodyTreeview(b1treeview, data)
             b1selection = view.getSelected(b1treeview)
             b1hbox = child(b1info, "B1HBox")
             b1info = child(b1hbox, "B1VBox2")
@@ -31,10 +36,13 @@ class Update(object):
             b1radius = child(b1info, "B1Radius")
             b1surtemp = child(b1info, "B1SurTemp")
             b1surpre = child(b1info, "B1SurPre")
+            print "box 1 done"
+
 
             b2box = child(InfoBox, "Body 2 box")
             b2info = child(b2box, "Body2info")
             b2treeview = child(b2info, "Body2Treeview")
+            b2treeview = Set.BodyTreeview(b2treeview, data)
             b2selection = view.getSelected(b2treeview)
             b2hbox = child(b2info, "B2HBox")
             b2info = child(b2hbox, "B2VBox2")
@@ -44,14 +52,22 @@ class Update(object):
             b2radius = child(b2info, "B2Radius")
             b2surtemp = child(b2info, "B2SurTemp")
             b2surpre = child(b2info, "B2SurPre")
-
+            print "box 2 done"
 
             dbbox = child(InfoBox, "DifferenceBox")
             dbinfo = child(dbbox, "DBox")
             dbdata = child(dbinfo, "Data")
+            dbmass = child(dbdata, "deltaMass")
+            dbradius = child(dbdata, "deltaRadius")
+            dbsurtemp = child(dbdata, "deltaSurfaceTemperature")
+            dbpre = child(dbdata, "deltaPressure")
+            dbdist = child(dbdata, "deltaDistance")
+            dbsign = child(dbdata, "deltaSignal")
+            print "difference done"
+
 
         except:
-            pass
+            print "didn't work"
 
     @staticmethod
     def Plot(window):

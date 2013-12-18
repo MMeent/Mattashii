@@ -17,3 +17,10 @@ def handlers():
     }
 
     return handlers
+
+class Set (object):
+    """No comments"""
+
+    @staticmethod
+    def BodyTreeview(treeview, data):
+        pass
