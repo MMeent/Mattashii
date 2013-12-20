@@ -8,8 +8,7 @@ import mattashii
 from mattashii import default
 
 import view
-
-from models import Set
+import models
 
 class Update(object):
     """ This is the class created to contain the update methods, so that I can update the different things
@@ -26,8 +25,8 @@ class Update(object):
             b1box = child(InfoBox, "Body 1 box")
             b1info = child(b1box, "Body1info")
             b1treeview = child(b1info, "Body1Treeview")
-            b1treeview = Set.BodyTreeview(b1treeview, data)
-            b1selection = view.getSelected(b1treeview)
+            b1selection = view.get_selected(b1treeview)
+            models.Set.body_selection(b1selection, data)
             b1hbox = child(b1info, "B1HBox")
             b1info = child(b1hbox, "B1VBox2")
             b1name = child(b1info, "B1Name")
@@ -42,8 +41,8 @@ class Update(object):
             b2box = child(InfoBox, "Body 2 box")
             b2info = child(b2box, "Body2info")
             b2treeview = child(b2info, "Body2Treeview")
-            b2treeview = Set.BodyTreeview(b2treeview, data)
-            b2selection = view.getSelected(b2treeview)
+            b2selection = view.get_selected(b2treeview)
+            models.Set.body_selection(b2selection, data)
             b2hbox = child(b2info, "B2HBox")
             b2info = child(b2hbox, "B2VBox2")
             b2name = child(b2info, "B2Name")
@@ -78,7 +77,7 @@ class newSimulation(object):
     """ This is the class whose function it is to contain the methods for a new simulation, as the name suggests."""
 
     @staticmethod
-    def Create(Box):
+    def create(Box):
         """ This method has the possibilities to create a new simulation. The box in what the data are has to be given
         as an argument. Different steps are being saved with the .step(n) postfix. The last step is renamed to the
         original output filename. """
@@ -142,20 +141,20 @@ class newSimulation(object):
         WriteDTime = TimePlot / Steps
         InFileName = InFile
 
-        process = Process(target=newSimulation.Simulate, args=(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps))
+        process = Process(target=newSimulation.simulate, args=(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps))
         process.start()
 
     @staticmethod
-    def Plot(data, plot):
+    def plot(data, plot):
         """ This method creates a new plot for the plot window."""
         NewWindow = Update.Plot(plot)
         return NewWindow
 
     @staticmethod
-    def Simulate(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps):
+    def simulate(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps):
         OutFileName = OutFileName + ".step1"
         with open(mattashii.main(InFileName, OutFileName, Precision, WriteDTime)) as data:
-            NewPlot = newSimulation.Plot(data, plot=None)
+            NewPlot = newSimulation.plot(data, plot=None)
 
         # loop through steps
         for i in range(int(Steps)):
@@ -163,7 +162,7 @@ class newSimulation(object):
             InFileName = OutFileName
             OutFileName = OriginalOutFile + ".step" + str(i + 1)
             with open(mattashii.main(InFileName, OutFileName, Precision, WriteDTime)) as data:
-                NewPlot = newSimulation.Plot(data, plot=None)
+                NewPlot = newSimulation.plot(data, plot=None)
 
         rename(OutFileName, OriginalOutFile)
         print "I'm done processing"

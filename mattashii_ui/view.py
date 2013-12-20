@@ -2,13 +2,13 @@ __author__ = 'matthias'
 
 from gi.repository import Gtk
 
-def getSelected(treeview):
+def get_selected(treeview):
     """ This method gets the selected value from the given GTK treeview"""
 
     print type(treeview)
     try:
         selection = treeview.get_selection()
-        tree_model, tree_iter = selection.get_selected()
+        (tree_model, tree_iter) = selection.get_selected()
         selected = tree_model.get_value(tree_iter, 0)
     except Exception as e:
         print e
@@ -22,5 +22,5 @@ def get_child_by_name(parent, childname):
             if name(i) == childname:
                 return i
     except Exception as  e:
-        print("problem found in checking " + parent + " for child " + childname + " : " + e)
+        print("problem found in checking {} for child {} : {}".format(parent, childname, e))
         return None
