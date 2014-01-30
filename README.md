@@ -1,7 +1,7 @@
 Mattashii: Simulating Galaxies
 =========
 
-The Mattashii project is built to calculate one of the problems of the universe: signal delay. 
+The Mattashii project is built to simulate any amount of celestial bodies.
 
 When I were searching for an programme that could give me the distance between two planets, as well as the signal delay between those, I didn't find any, what suprized me.
 Then, after a while, I were stumbling around some simulation code for different planets, but it failed to simulate things correctly, for it put the sun as an solid, immovable object in the center of the universe, what it isn't.
