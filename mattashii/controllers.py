@@ -99,9 +99,9 @@ class body (object):
         force = view.force(obj, object, Gc)
         distance = view.distance(obj, object)
         if distance != 0:
-            obj["ax"] += force*(obj["x"] - object["x"])/distance
-            obj["ay"] += force*(obj["y"] - object["y"])/distance
-            obj["az"] += force*(obj["z"] - object["z"])/distance
+            obj["ax"] += force*(obj["x"] - object["x"])/(distance * obj["mass"])
+            obj["ay"] += force*(obj["y"] - object["y"])/(distance * obj["mass"])
+            obj["az"] += force*(obj["z"] - object["z"])/(distance * obj["mass"])
 
     @staticmethod
     def reset_acceleration(obj):

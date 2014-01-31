@@ -2,8 +2,6 @@ __author__ = 'matthias'
 
 from gi.repository import Gtk
 
-import mattashii
-
 import models
 import view
 import controllers

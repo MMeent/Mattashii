@@ -26,6 +26,6 @@ class Set(object):
         print type(liststore)
         liststore = Gtk.ListStore()
         if True:
-            return treeview
+            return liststore
         for i in data:
             pass

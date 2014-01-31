@@ -16,7 +16,8 @@ class Update(object):
 
     @staticmethod
     def Boxes(InfoBox, widget):
-        """ The method to update the Liststores in the window. """
+        """ The method to update the Liststores in the window.
+            Since GTK has no easy way to get to a child object, I try to find it the nasty way. """
         name = Gtk.Buildable.get_name
         child = view.get_child_by_name
         data = default.Objects()
@@ -70,11 +71,13 @@ class Update(object):
 
     @staticmethod
     def Plot(window):
-        """ The method to update the plot. """
-        pass
+        """ The method to update the plot.
+            The plotting is not yet implemented."""
+        raise NotImplementedError
 
 class newSimulation(object):
-    """ This is the class whose function it is to contain the methods for a new simulation, as the name suggests."""
+    """ This is the class whose function it is to contain the methods for a new simulation, as the name suggests.
+        The """
 
     @staticmethod
     def create(Box):
@@ -152,12 +155,14 @@ class newSimulation(object):
 
     @staticmethod
     def simulate(InFileName, OriginalOutFile, OutFileName, Precision, WriteDTime, Steps):
-        OutFileName = OutFileName + ".step1"
+        """ This method cycles through the different steps.
+            It generates [steps] files, of which the last one is renamed to the OutFileName string value. """
+        OutFileName = OutFileName + ".step0"
         with open(mattashii.main(InFileName, OutFileName, Precision, WriteDTime)) as data:
             NewPlot = newSimulation.plot(data, plot=None)
 
         # loop through steps
-        for i in range(int(Steps)):
+        for i in range(int(Steps) - 1):
             print i
             InFileName = OutFileName
             OutFileName = OriginalOutFile + ".step" + str(i + 1)
